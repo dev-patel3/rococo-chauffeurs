@@ -2,21 +2,29 @@
 import React from 'react';
 import { Phone, Mail, ChevronRight, Star, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-
+import Image, { StaticImageData } from 'next/image';
+import mercedesSclass from './assets/images/mercedes-s-class.jpg';
+import mercedesEclass from './assets/images/mercedes-e-class.jpg';
+import mercedesVclass from './assets/images/mercedes-v-class.jpg';
+import airportTransfers from './assets/images/airport-transfers.webp';
+import businessTravel from './assets/images/business-travel.webp';
+import privateJet from './assets/images/private-jet.jpg';
+import banner from './assets/images/banner.jpg'
 // Types
+
 type Vehicle = {
   name: string;
   description: string;
   seats: number;
   features: string[];
   bestFor: string[];
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
 };
 
 type Service = {
   title: string;
   description: string[];
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
 };
 
 // Header Component
@@ -30,11 +38,11 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <Phone size={16} className="mr-2" />
-              <span className="text-sm">1-800-ROCOCO</span>
+              <span className="text-sm">+44 7956 379100</span>
             </div>
             <div className="flex items-center">
               <Mail size={16} className="mr-2" />
-              <span className="text-sm">info@rococoChauffeurs.com</span>
+              <span className="text-sm">shilpan@[placeholder].com</span>
             </div>
           </div>
         </div>
@@ -69,8 +77,8 @@ const Header = () => {
 // Hero Section
 const Hero = () => (
   <section className="relative h-96 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-    <img
-      src="/api/placeholder/1920/600"
+    <Image
+      src={banner}
       alt="Luxury car"
       className="absolute inset-0 w-full h-full object-cover mix-blend-overlay"
     />
@@ -99,7 +107,7 @@ const Fleet = () => {
       seats: 4,
       features: ["Leather seats", "Climate control", "Wi-Fi", "Privacy glass"],
       bestFor: ["VIP transfers", "Weddings", "Corporate events"],
-      imageUrl: "/api/placeholder/600/400"
+      imageUrl: mercedesSclass
     },
     {
       name: "Mercedes E-Class",
@@ -107,7 +115,7 @@ const Fleet = () => {
       seats: 4,
       features: ["Comfortable seating", "Advanced navigation", "Wi-Fi"],
       bestFor: ["Business travel", "Airport transfers", "City tours"],
-      imageUrl: "/api/placeholder/600/400"
+      imageUrl: mercedesEclass
     },
     {
       name: "Mercedes V-Class",
@@ -115,28 +123,28 @@ const Fleet = () => {
       seats: 7,
       features: ["Spacious interior", "Reclining seats", "Wi-Fi", "Entertainment system"],
       bestFor: ["Group travel", "Family trips", "Executive transport"],
-      imageUrl: "/api/placeholder/600/400"
+      imageUrl: mercedesVclass
     }
   ];
 
   return (
     <section id="fleet" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Luxury Fleet</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Our Luxury Fleet</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vehicles.map((vehicle, index) => (
             <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img
+              <Image
                 src={vehicle.imageUrl}
                 alt={vehicle.name}
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{vehicle.name}</h3>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">{vehicle.name}</h3>
                 <p className="text-gray-600 mb-4">{vehicle.description}</p>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2">Features:</h4>
+                    <h4 className="font-semibold mb-2 text-gray-900">Features:</h4>
                     <ul className="list-disc pl-5 text-gray-600">
                       {vehicle.features.map((feature, i) => (
                         <li key={i}>{feature}</li>
@@ -144,7 +152,7 @@ const Fleet = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Best For:</h4>
+                    <h4 className="font-semibold mb-2 text-gray-900">Best For:</h4>
                     <ul className="list-disc pl-5 text-gray-600">
                       {vehicle.bestFor.map((use, i) => (
                         <li key={i}>{use}</li>
@@ -170,7 +178,7 @@ const Services = () => {
         "Arrive in style and comfort to your business meetings and conferences.",
         "Our professional chauffeurs ensure punctuality and reliability."
       ],
-      imageUrl: "/api/placeholder/600/400"
+      imageUrl: businessTravel
     },
     {
       title: "Airport Transfers",
@@ -178,7 +186,7 @@ const Services = () => {
         "Efficient and luxurious transfers to and from airports.",
         "We monitor flight schedules to ensure timely arrivals."
       ],
-      imageUrl: "/api/placeholder/600/400"
+      imageUrl: airportTransfers
     },
     {
       title: "Private Jet Services",
@@ -187,7 +195,7 @@ const Services = () => {
         "Coordination with private jet schedules.",
         "Bespoke services for specific needs."
       ],
-      imageUrl: "/api/placeholder/600/400"
+      imageUrl: privateJet
     }
   ];
 
@@ -198,13 +206,13 @@ const Services = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img
+              <Image
                 src={service.imageUrl}
                 alt={service.title}
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+                <h3 className="text-xl font-bold mb-4 text-gray-900">{service.title}</h3>
                 {service.description.map((desc, i) => (
                   <p key={i} className="text-gray-600 mb-2">{desc}</p>
                 ))}
@@ -222,13 +230,13 @@ const Testimonials = () => {
   const testimonials = [
     {
       text: "Exceptional service and attention to detail. The chauffeur was professional and punctual.",
-      author: "John Smith",
-      role: "CEO, Tech Corp"
+      author: "[Name]",
+      role: "[Role]"
     },
     {
       text: "The most reliable luxury transport service I've ever used. Highly recommended!",
-      author: "Sarah Johnson",
-      role: "Executive Director"
+      author: "[Name]",
+      role: "[Role]"
     }
   ];
 
@@ -269,11 +277,11 @@ const Footer = () => (
           <div className="space-y-2">
             <div className="flex items-center">
               <Phone size={16} className="mr-2" />
-              <span>1-800-ROCOCO</span>
+              <span>+44 7956 379100</span>
             </div>
             <div className="flex items-center">
               <Mail size={16} className="mr-2" />
-              <span>info@rococoChauffeurs.com</span>
+              <span>shilpan@[placeholder].com</span>
             </div>
           </div>
         </div>
